@@ -1,0 +1,13 @@
+# Core Cryptography Library (OpenSSL / Rust bindings)
+cryptography>=42.0.0
+
+# Automated Testing Framework
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+
+# Desktop User Interface Framework
+customtkinter>=5.2.0
+
+# Performance Benchmarking & Data Visualization
+matplotlib>=3.8.0
+numpy>=1.26.0

@@ -1,0 +1,141 @@
+{
+  "hybrid": [
+    {
+      "label": "64 B",
+      "size_bytes": 64,
+      "iterations": 10,
+      "mean_enc_ms": 0.05247999999937747,
+      "mean_dec_ms": 0.6451700000184246,
+      "mean_total_ms": 0.6976500000178021,
+      "std_total_ms": 0.015617956235052662,
+      "min_total_ms": 0.685800000155723,
+      "max_total_ms": 0.7388000001355977,
+      "throughput_mb_s": 0.08748678599361076
+    },
+    {
+      "label": "1 KB",
+      "size_bytes": 1024,
+      "iterations": 10,
+      "mean_enc_ms": 0.06536000000778586,
+      "mean_dec_ms": 0.641849999999522,
+      "mean_total_ms": 0.7072100000073078,
+      "std_total_ms": 0.06014361425689825,
+      "min_total_ms": 0.6727000001092165,
+      "max_total_ms": 0.8766000000832719,
+      "throughput_mb_s": 1.3808663621695236
+    },
+    {
+      "label": "10 KB",
+      "size_bytes": 10240,
+      "iterations": 10,
+      "mean_enc_ms": 0.07157999999662934,
+      "mean_dec_ms": 0.7481799999823124,
+      "mean_total_ms": 0.8197599999789418,
+      "std_total_ms": 0.17369953751208755,
+      "min_total_ms": 0.7170000000087384,
+      "max_total_ms": 1.278299999967203,
+      "throughput_mb_s": 11.912785449705844
+    },
+    {
+      "label": "100 KB",
+      "size_bytes": 102400,
+      "iterations": 10,
+      "mean_enc_ms": 0.09139999998524218,
+      "mean_dec_ms": 0.6916499999988446,
+      "mean_total_ms": 0.7830499999840868,
+      "std_total_ms": 0.03626958473555252,
+      "min_total_ms": 0.7349999999632928,
+      "max_total_ms": 0.8311999998795727,
+      "throughput_mb_s": 124.71266202922494
+    },
+    {
+      "label": "1 MB",
+      "size_bytes": 1048576,
+      "iterations": 10,
+      "mean_enc_ms": 1.5327499999784777,
+      "mean_dec_ms": 2.1291699999892444,
+      "mean_total_ms": 3.661919999967722,
+      "std_total_ms": 0.3227245809511524,
+      "min_total_ms": 3.119499999911568,
+      "max_total_ms": 4.345100000136881,
+      "throughput_mb_s": 273.0807882227942
+    }
+  ],
+  "rsa_only": {
+    "max_allowed_payload_bytes": 190,
+    "supported": [
+      {
+        "label": "64 B",
+        "size_bytes": 64,
+        "status": "SUPPORTED",
+        "mean_enc_ms": 0.03594999998313142,
+        "mean_dec_ms": 0.6180700000072648,
+        "mean_total_ms": 0.6540199999903962,
+        "std_total_ms": 0.013103672078451522,
+        "throughput_mb_s": 0.09332307307253028
+      },
+      {
+        "label": "128 B",
+        "size_bytes": 128,
+        "status": "SUPPORTED",
+        "mean_enc_ms": 0.03645000001597509,
+        "mean_dec_ms": 0.6126100000074075,
+        "mean_total_ms": 0.6490600000233826,
+        "std_total_ms": 0.00892539447010692,
+        "throughput_mb_s": 0.18807246247743256
+      },
+      {
+        "label": "190 B (Batas Maksimum)",
+        "size_bytes": 190,
+        "status": "SUPPORTED",
+        "mean_enc_ms": 0.034600000026330235,
+        "mean_dec_ms": 0.664150000011432,
+        "mean_total_ms": 0.6987500000377622,
+        "std_total_ms": 0.16860802175478085,
+        "throughput_mb_s": 0.2593175243039643
+      }
+    ],
+    "unsupported": [
+      {
+        "label": "191 B (Melebihi Batas 1 Byte)",
+        "size_bytes": 191,
+        "status": "UNSUPPORTED_EXCEEDS_CAPACITY",
+        "failed_as_expected": true,
+        "error_type": "ValueError",
+        "reason": "Ukuran payload 191B >= batas maksimum 190B untuk RSA-2048 OAEP SHA-256."
+      },
+      {
+        "label": "1 KB",
+        "size_bytes": 1024,
+        "status": "UNSUPPORTED_EXCEEDS_CAPACITY",
+        "failed_as_expected": true,
+        "error_type": "ValueError",
+        "reason": "Ukuran payload 1024B >= batas maksimum 190B untuk RSA-2048 OAEP SHA-256."
+      },
+      {
+        "label": "10 KB",
+        "size_bytes": 10240,
+        "status": "UNSUPPORTED_EXCEEDS_CAPACITY",
+        "failed_as_expected": true,
+        "error_type": "ValueError",
+        "reason": "Ukuran payload 10240B >= batas maksimum 190B untuk RSA-2048 OAEP SHA-256."
+      },
+      {
+        "label": "100 KB",
+        "size_bytes": 102400,
+        "status": "UNSUPPORTED_EXCEEDS_CAPACITY",
+        "failed_as_expected": true,
+        "error_type": "ValueError",
+        "reason": "Ukuran payload 102400B >= batas maksimum 190B untuk RSA-2048 OAEP SHA-256."
+      },
+      {
+        "label": "1 MB",
+        "size_bytes": 1048576,
+        "status": "UNSUPPORTED_EXCEEDS_CAPACITY",
+        "failed_as_expected": true,
+        "error_type": "ValueError",
+        "reason": "Ukuran payload 1048576B >= batas maksimum 190B untuk RSA-2048 OAEP SHA-256."
+      }
+    ]
+  }
+}
