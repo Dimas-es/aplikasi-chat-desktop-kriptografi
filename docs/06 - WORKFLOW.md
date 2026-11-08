@@ -285,6 +285,38 @@ flowchart TD
 | ATK-05 | Replay Attack | Mengirim ulang paket yang sudah diproses | Ditolak oleh rule `counter <= highest`; status `ditolak_replay` | Lolos uji negatif |
 | ATK-06 | Nonce Reuse Demo (Bonus) | Enkripsi 2 pesan berbeda dengan K_AES & Nonce sama | Menunjukkan kebocoran XOR plaintext & kegagalan keaslian | Lolos demonstrasi |
 
+### Demonstrasi Interaktif Real-Time: Konsol Penyadapan Eve (`eve_hacker.py`)
+
+Selain pengujian otomatis berbasis skrip terminal (`python -m simulation.runner`), sistem menyediakan aplikasi konsol GUI mandiri bernama **Eve the Hacker** (`python -m client.eve_hacker`):
+
+```mermaid
+sequenceDiagram
+  autonumber
+  actor B as Bob (Pengirim)
+  participant R as Relay Server
+  actor E as Eve (Penyadap / MITM)
+  actor A as Alice (Penerima)
+
+  E->>R: REGISTER_SNIFFER (Mode sadap aktif)
+  B->>R: SEND (Paket counter #N untuk Alice)
+  R--)E: SNIFFED_PACKET (Salinan paket transit)
+  Note over E: Paket dicegat! Menampilkan Hex Ciphertext, Tag, Wrapped Key
+  R->>A: INCOMING_PACKET (Paket asli diterima Alice -> VALID)
+
+  alt Skenario Penyadapan: Eve Coba Buka Pesan
+    E->>E: Coba unwrap RSA-OAEP pakai Kunci Privat Eve
+    Note over E: GAGAL (KeyUnwrapError). Pesan tetap rahasia!
+  else Skenario MITM: Eve Rusak 1 Byte (Tamper)
+    E->>R: SEND (Paket modifikasi counter #N+1 ke Alice)
+    R->>A: Teruskan paket termanipulasi
+    Note over A: Verifikasi Tag GCM GAGAL! Muncul alarm integritas merah.
+  else Skenario Replay: Eve Kirim Ulang Paket Lama
+    E->>R: SEND (Paket duplikat counter #N ke Alice)
+    R->>A: Teruskan paket duplikat
+    Note over A: Anti-Replay Counter GAGAL! Paket ditolak.
+  end
+```
+
 ---
 
 ## 7. Alur Pengujian Benchmark Kinerja

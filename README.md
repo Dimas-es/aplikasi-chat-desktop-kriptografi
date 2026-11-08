@@ -18,9 +18,11 @@ Prototipe aplikasi chat desktop berbasis Python dengan keamanan kriptografi hybr
    - Transparansi audit per tahap matematis kriptografi (Plaintext, Kunci, Nonce, AAD, Ciphertext, Tag, Wrapped Key).
 4. **Relay Server Zero-Knowledge:**
    - Server perantara jaringan lokal yang hanya meneruskan muatan terenkripsi JSON v1 tanpa memegang private key atau plaintext pengguna.
-5. **Simulasi Serangan Cepat & Otomasi Pengujian:**
+5. **Konsol Penyadapan Eve (Hacker / MITM Console):**
+   - Aplikasi GUI terpisah (`client/eve_hacker.py`) untuk menyadap paket yang melintas secara real-time dan mengeksekusi serangan nyata (Tamper, Replay, Spoofing) dari pihak ketiga.
+6. **Simulasi Serangan Cepat & Otomasi Pengujian:**
    - Uji tamper 1-byte, wrong private key, replay attack, dan demonstrasi kelemahan nonce reuse.
-   - 100% lulus 66 unit test resmi termasuk verifikasi vektor uji NIST SP 800-38D.
+   - 100% lulus unit test resmi termasuk verifikasi vektor uji NIST SP 800-38D.
 
 ---
 
@@ -69,6 +71,10 @@ python -m relay.server --host 127.0.0.1 --port 8000
 - **Klien Bob (Terminal 3):**
   ```powershell
   python -m client.main --user bob --port 9002
+  ```
+- **Konsol Penyadapan Eve (Terminal 4 - Opsional untuk Simulasi Hacker):**
+  ```powershell
+  python -m client.eve_hacker --host 127.0.0.1 --port 8000
   ```
 
 ---

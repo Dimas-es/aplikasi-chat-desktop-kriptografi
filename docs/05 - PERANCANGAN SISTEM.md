@@ -8,7 +8,7 @@
 - **Messaging:** menyusun dan mem-parse paket, menaikkan dan memeriksa counter, menghasilkan status pesan.
 - **Network:** koneksi socket langsung atau ke relay; pengiriman dan penerimaan paket.
 - **Persistence:** penyimpanan lokal identitas, kontak, dan counter; relay menyimpan antrean paket ciphertext.
-- **Simulation:** skenario serangan dan benchmark hybrid vs RSA-only, hanya pada lingkungan uji.
+- **Simulation & Attacker Console:** skenario serangan otomatis (CLI runner) dan konsol grafis penyadap independen (`eve_hacker.py`) untuk inspeksi paket serta injeksi serangan MITM secara interaktif.
 
 ## 2. Entitas data
 
@@ -37,6 +37,8 @@ Tabel hasil uji tidak diberi foreign key karena hanya merekam hasil pengujian da
 | `GET_KEY` | klien → relay | Mengambil public key lawan bicara |
 | `SEND` | klien → relay atau klien lain | Mengirim paket pesan terenkripsi |
 | `FETCH` | klien → relay | Mengambil paket tertunda untuk user\_id |
+| `REGISTER_SNIFFER` | penyadap (Eve) → relay | Mendaftarkan sesi sniffer untuk menerima tembusan paket transit |
+| `SNIFFED_PACKET` | relay → penyadap (Eve) | Mengirimkan salinan paket yang sedang transit ke konsol penyadap |
 
 Pada mode langsung via socket hanya `SEND` yang dipakai, dan public key ditukar di awal sesi. Tipe di atas bersifat usulan dan mengikuti keputusan arsitektur komunikasi. Relay tidak mengautentikasi pengguna pada tingkat prototipe, sehingga siapa pun dapat mengunggah public key atas nama sebuah user\_id; hal ini dicatat sebagai keterbatasan.
 

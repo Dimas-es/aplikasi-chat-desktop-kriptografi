@@ -24,6 +24,7 @@ kripto/
 ├── client/
 │   ├── main.py
 │   ├── app.py
+│   ├── eve_hacker.py
 │   ├── ui/
 │   │   ├── chat_window.py
 │   │   ├── visualizer_panel.py
@@ -88,7 +89,7 @@ kripto/
 
 ## Tanggung jawab
 
-- `client`: antarmuka chat desktop, panel visualisasi proses kriptografi (hex & byte inspector), dialog pembuatan kunci/passphrase, dan controller aplikasi.
+- `client`: antarmuka chat desktop, konsol penyadapan/penyerang independen Eve (`eve_hacker.py`), panel visualisasi proses kriptografi (hex & byte inspector), dialog pembuatan kunci/passphrase, dan controller aplikasi.
 - `src/crypto`: implementasi primitif kriptografi murni (AES-256-GCM, RSA-OAEP SHA-256, derivasi kunci passphrase PBKDF2/Argon2, dan fingerprint).
 - `src/messaging`: serializer/deserializer format paket JSON v1, pengikat AAD kanonikal, dan manajemen status pesan.
 - `src/storage`: penyimpanan lokal identitas dan private key terenkripsi (`identity`), kontak lawan bicara (`contacts`), dan state counter anti-replay persisten (`counter_state`).
