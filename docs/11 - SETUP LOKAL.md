@@ -113,7 +113,7 @@ Konsol Eve bertema gelap/merah akan:
 
 ## 4. Alur Panduan Demo & Evaluasi Akademik
 
-1. **Buka Panel Visualizer:** Pada jendela Klien Alice, aktifkan panel **Visualizer (Hex & Byte Inspector)** di sisi kanan antarmuka.
+1. **Buka Panel Visualizer:** Panel **Visualizer (Hex & Byte Inspector)** aktif secara default di sisi kanan antarmuka. Anda dapat menyembunyikan atau menampilkannya kapan saja menggunakan tombol **`[👁️ Sembunyikan/Buka Visualizer]`** di header obrolan.
 2. **Kirim Pesan:** Ketik pesan teks (misalnya: *"Halo Bob, ini pesan rahasia tugas kriptografi! 🚀"*), lalu klik **Kirim**.
 3. **Amati Transformasi Kriptografi di Pengirim (Alice):**
    - **Stage 1 (Plaintext):** Karakter string dikonversi ke stream byte UTF-8.
@@ -129,14 +129,12 @@ Konsol Eve bertema gelap/merah akan:
    - Pesan didekripsi dan muncul di gelembung obrolan Bob dengan tanda centang verifikasi hijau.
    - Counter tertinggi Bob diperbarui secara persisten ke $N=1$.
 5. **Uji Serangan Nyata via Konsol Penyadapan Eve:**
+   - Seluruh operasi serangan (Tamper, Replay, Spoofing) dipusatkan secara elegan ke Konsol Eve (`client/eve_hacker.py`) untuk menjaga antarmuka Bob dan Alice tetap realistis layaknya pengguna normal.
    - Setelah Bob mengirim pesan ke Alice, paket akan otomatis tertangkap di jendela Eve.
    - **Aksi 1 (Dekripsi Kunci Eve):** Klik `[🔓 1. Coba Buka Isi Pesan]`. Terminal Eve akan menampilkan error `KeyUnwrapError`, membuktikan RSA-OAEP melindungi rahasia pesan dari pihak ketiga.
    - **Aksi 2 (Tampering 1-Byte):** Klik `[⚡ 2. Rusak 1 Byte Pesan]`. Eve mengirimkan paket termanipulasi ke Alice. Jendela Alice akan memunculkan alarm merah `⚠️ PERINGATAN INTEGRITAS GAGAL!`.
    - **Aksi 3 (Replay Attack):** Klik `[🔁 3. Kirim Ulang Paket Asli]`. Eve menyuntikkan duplikat paket ke Alice. Jendela Alice akan menolak dengan alarm merah `🚨 SERANGAN REPLAY DITOLAK!`.
    - **Aksi 4 (Spoofing Signature):** Klik `[✍️ 4. Palsukan Signature]`. Eve memalsukan tanda tangan digital. Jendela Alice akan menolak dengan alarm merah `🚨 PEMALSUAN IDENTITAS TERDETEKSI!`.
-
-6. **Uji Serangan Cepat Langsung dari Chat Window:**
-   - Selain konsol Eve, jendela chat juga menyediakan tombol simulasi cepat di baris *Uji Serangan* (`🔁 Uji Replay`, `⚡ Tamper 1-Byte`, `✍️ Palsukan Sig`) untuk pengujian lokal instan.
 
 ---
 

@@ -35,6 +35,7 @@ class ChatWindow(ctk.CTkFrame):
         self.active_contact_id: Optional[str] = None
         self.last_sent_packet: Optional[MessagePacket] = None
         self.last_received_packet: Optional[MessagePacket] = None
+        self.is_visualizer_visible: bool = True
 
         self._build_ui()
         self.refresh_contacts()
@@ -129,6 +130,18 @@ class ChatWindow(ctk.CTkFrame):
         )
         self.chat_title.pack(side="left", padx=15, pady=10)
 
+        # Tombol Buka/Tutup Mode Visualizer Kriptografi
+        self.visualizer_toggle_btn = ctk.CTkButton(
+            self.chat_header,
+            text="👁️ Sembunyikan Visualizer",
+            font=ctk.CTkFont(size=11),
+            height=26,
+            fg_color="#2A2A2A",
+            hover_color="#3A3A3A",
+            command=self._toggle_visualizer,
+        )
+        self.visualizer_toggle_btn.pack(side="right", padx=(5, 12), pady=10)
+
         self.verify_toggle_btn = ctk.CTkButton(
             self.chat_header,
             text="Verifikasi Fingerprint",
@@ -143,34 +156,9 @@ class ChatWindow(ctk.CTkFrame):
         self.message_frame = ctk.CTkScrollableFrame(self.chat_area)
         self.message_frame.grid(row=1, column=0, sticky="nsew", padx=10, pady=5)
 
-        # Action Bar Simulasi Cepat (Edukasi / Demonstrasi Serangan)
-        sim_bar = ctk.CTkFrame(self.chat_area, height=30, fg_color="transparent")
-        sim_bar.grid(row=2, column=0, sticky="ew", padx=10, pady=(2, 0))
-
-        sim_label = ctk.CTkLabel(sim_bar, text="Uji Serangan:", font=ctk.CTkFont(size=11, weight="bold"), text_color="gray")
-        sim_label.pack(side="left", padx=(5, 5))
-
-        btn_replay = ctk.CTkButton(
-            sim_bar, text="🔁 Uji Replay", font=ctk.CTkFont(size=10), height=22, width=80, fg_color="#6C3483",
-            command=self._simulate_replay_attack,
-        )
-        btn_replay.pack(side="left", padx=3)
-
-        btn_tamper = ctk.CTkButton(
-            sim_bar, text="⚡ Tamper 1-Byte", font=ctk.CTkFont(size=10), height=22, width=95, fg_color="#922B21",
-            command=self._simulate_tamper_attack,
-        )
-        btn_tamper.pack(side="left", padx=3)
-
-        btn_spoof = ctk.CTkButton(
-            sim_bar, text="✍️ Palsukan Sig", font=ctk.CTkFont(size=10), height=22, width=95, fg_color="#7B241C",
-            command=self._simulate_spoof_signature_attack,
-        )
-        btn_spoof.pack(side="left", padx=3)
-
-        # Baris Input Pesan
+        # Baris Input Pesan (sim_bar dihilangkan, langsung terhubung rapi ke bawah pesan)
         input_container = ctk.CTkFrame(self.chat_area, height=50)
-        input_container.grid(row=3, column=0, sticky="ew", padx=10, pady=10)
+        input_container.grid(row=2, column=0, sticky="ew", padx=10, pady=10)
 
         self.msg_entry = ctk.CTkEntry(
             input_container,
@@ -274,6 +262,18 @@ class ChatWindow(ctk.CTkFrame):
                 fg_color="#D35400",
                 hover_color="#A04000",
             )
+
+    def _toggle_visualizer(self):
+        """Membuka atau menyembunyikan panel visualizer kriptografi di sisi kanan."""
+        self.is_visualizer_visible = not self.is_visualizer_visible
+        if self.is_visualizer_visible:
+            self.visualizer.grid(row=0, column=2, sticky="nsew", padx=(2, 0), pady=0)
+            self.grid_columnconfigure(2, weight=0, minsize=460)
+            self.visualizer_toggle_btn.configure(text="👁️ Sembunyikan Visualizer", fg_color="#2A2A2A")
+        else:
+            self.visualizer.grid_forget()
+            self.grid_columnconfigure(2, weight=0, minsize=0)
+            self.visualizer_toggle_btn.configure(text="👁️ Buka Visualizer", fg_color="#1F6AA5")
 
     def _toggle_verified_contact(self):
         if not self.active_contact_id:
